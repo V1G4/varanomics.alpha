@@ -1,0 +1,47 @@
+<main>
+    <h1>Admin Dashboard</h1>
+
+    <h2>Business Management</h2>
+    <% if(locals.businessUnits && locals.businessUnits.length > 0) { %>
+        <ul>
+            <% locals.businessUnits.forEach(unit => { %>
+
+                <li><%= unit.title %></li>
+
+                
+
+                <form action="/unit/move-up/business-management/<%= unit._id %>?_method=PATCH" method="POST">
+                    <input type="submit" value="Move Up">
+                </form>
+
+                <form action="/unit/business-management/<%= unit._id %>?_method=DELETE" method="POST">
+                    <input type="submit" value="Delete">
+                </form>
+
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No units available.</p>
+    <% } %>
+
+    <form action="/unit/business-management" method="POST">
+        <input type="submit" value="New unit">
+    </form>
+
+
+    <h2>Economics</h2>
+    <% if(locals.economicsUnits && locals.economicsUnits.length > 0) { %>
+        <ul>
+            <% locals.economicsUnits.forEach(unit => { %>
+                <li><%= unit.title %></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No units available.</p>
+    <% } %>
+
+    <form action="/unit/economics" method="POST">
+        <input type="submit" value="New unit">
+    </form>
+</main>
+
