@@ -1,47 +1,190 @@
-<main>
+<div class="dashboard-container"><main>
+
+    <form action="/logout" method="POST">
+        <a class="logout" onclick="this.parentNode.submit();">&larr; Log Out</a>
+    </form>
+
     <h1>Admin Dashboard</h1>
 
-    <h2>Business Management</h2>
-    <% if(locals.businessUnits && locals.businessUnits.length > 0) { %>
-        <ul>
-            <% locals.businessUnits.forEach(unit => { %>
+    <section>
+        <h2>Business Management</h2>
 
-                <li><%= unit.title %></li>
+        <% if (businessUnits && businessUnits.length > 0) { %>
+            <ol class="units">
+                <% businessUnits.forEach(unit => { %>
+                    <li><%- include ('./partials/unit', { subjectName: "business-management", unit: unit }) %></li>
+                <% }) %>
+            </ol>
+        <% } %>
+        
+        <form action="/unit/create/business-management" method="POST">
+            <input class="add-unit" type="submit" value="Add Unit">
+        </form>
+    </section>
 
-                
+    <section>
+        <h2>Economics</h2>
 
-                <form action="/unit/move-up/business-management/<%= unit._id %>?_method=PATCH" method="POST">
-                    <input type="submit" value="Move Up">
-                </form>
+        <% if(economicsUnits && economicsUnits.length > 0) { %>
+            <ol class="units">
+                <% economicsUnits.forEach(unit => { %>
+                    <li><%- include ('./partials/unit', { subjectName: "economics", unit: unit }) %></li>
+                <% }) %>
+            </ol>
+        <% } %>
 
-                <form action="/unit/business-management/<%= unit._id %>?_method=DELETE" method="POST">
-                    <input type="submit" value="Delete">
-                </form>
+        <form action="/unit/create/economics" method="POST">
+            <input class="add-unit" type="submit" value="Add Unit">
+        </form>
+    </section>
 
-            <% }) %>
-        </ul>
-    <% } else { %>
-        <p>No units available.</p>
-    <% } %>
+</main></div>
 
-    <form action="/unit/business-management" method="POST">
-        <input type="submit" value="New unit">
-    </form>
+<style>
 
+    .dashboard-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-    <h2>Economics</h2>
-    <% if(locals.economicsUnits && locals.economicsUnits.length > 0) { %>
-        <ul>
-            <% locals.economicsUnits.forEach(unit => { %>
-                <li><%= unit.title %></li>
-            <% }) %>
-        </ul>
-    <% } else { %>
-        <p>No units available.</p>
-    <% } %>
+    main {
+        width: 720px;
+        padding: 80px;
+        margin: 0 auto;
 
-    <form action="/unit/economics" method="POST">
-        <input type="submit" value="New unit">
-    </form>
-</main>
+        display: flex;
+        flex-direction: column;
+    }
 
+    h1 { margin-bottom: 24px; }
+
+    .logout { color: black; }
+    .logout:hover { text-decoration: underline; }
+
+    section {
+        margin-bottom: 48px
+    }
+
+    .unit-wrapper {
+        background-color: #c0cad6;
+        
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: 100%;
+
+        margin-top: 20px;
+    }
+
+    .unit-top-wrapper {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+
+        padding: 9px 9px 9px 16px;
+    }
+
+    .unit-actions-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .chapter-wrapper {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+
+        padding: 0 9px 0 16px;
+    }
+
+    .chapter-actions-wrapper {
+        display: flex;
+        flex-direction: row;
+
+        visibility: hidden;
+    }
+
+    .chapter-wrapper:hover {
+        background-color: whitesmoke;
+    }
+
+    .chapter-wrapper:hover .chapter-actions-wrapper {
+        visibility: visible;
+    }
+
+    .units {
+        list-style-type: none;
+        counter-reset: unit;
+    }
+
+    .chapters {
+        list-style-type: none;
+        counter-reset: chapter;
+
+        margin-bottom: 9px;
+    }
+
+    .unit-wrapper h3::before {
+        counter-increment: unit;
+        content: "Unit " counter(unit) ": ";
+    }
+
+    .chapter-wrapper p::before {
+        counter-increment: chapter;
+        content: counter(unit) "." counter(chapter) " - ";
+    }
+
+    .action {
+        padding: 9px 10px;
+        margin-left: 10px;
+
+        color: black;
+        background-color: transparent;
+
+        font-family: 'DM-Sans';
+        font-weight: 400;
+        font-variation-settings: 'opsz' 16;
+        font-size: 16px;
+    }
+
+    .action:hover {
+        text-decoration: underline;
+    }
+
+    .add-unit, .add-chapter {
+        border-radius: 5px;
+        padding: 6px 10px;
+        box-sizing: border-box;
+        width: 100%;
+
+        font-family: 'DM-Sans';
+        font-weight: 400;
+        font-variation-settings: 'opsz' 16;
+        font-size: 16px;
+    }
+
+    .add-unit {
+        margin-top: 20px;
+
+        background-color: #c0cad6;
+    }
+
+    .add-chapter-wrapper {
+        padding: 9px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .add-chapter:hover {
+        color: black;
+        background-color: whitesmoke;
+    }
+
+    .add-chapter, .add-unit:hover {
+        color: whitesmoke;
+        background-color: black;
+    }
+
+</style>

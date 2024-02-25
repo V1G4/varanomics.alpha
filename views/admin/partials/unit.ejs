@@ -1,0 +1,35 @@
+<div class="unit-wrapper">
+
+    <div class="unit-top-wrapper">
+        <h3><%= unit.title %></h3>
+
+        <div class="unit-actions-wrapper">
+            <a class="action" href="/unit/rename/<%= unit._id %>">Rename</a>
+
+            <form action="/unit/move-up/<%= subjectName %>/<%= unit._id %>?_method=PATCH" method="POST">
+                <input class="action" type="submit" value="Move Up">
+            </form>
+
+            <form action="/unit/delete/<%= subjectName %>/<%= unit._id %>?_method=DELETE" method="POST">
+                <input class="action" type="submit" value="Delete">
+            </form>
+        </div>
+    </div>
+
+    <% if(unit.chapters && unit.chapters.length > 0) { %>
+
+        <ol class="chapters">
+            <% unit.chapters.forEach(chapter => { %>
+                <li><%- include ('./chapter.ejs', { unitId: unit._id, chapter: chapter }) %></li>
+            <% }) %>
+        </ol>
+
+    <% } %>
+
+    <div class="add-chapter-wrapper">
+        <form action="/chapter/create/<%= unit._id %>" method="POST">
+            <input class="add-chapter" type="submit" value="Add Chapter">
+        </form>
+    </div>
+
+</div>

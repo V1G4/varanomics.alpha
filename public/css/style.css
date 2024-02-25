@@ -1,3 +1,31 @@
-body {
-    background-color: aqua;
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-decoration: none;
 }
+
+@font-face {
+    font-family: 'DM-Sans';
+    src: url('../fonts/DMSans-VariableFont_opsz\,wght.ttf') format('truetype');
+    font-weight: 100 1000;
+}
+
+h1, h2, h3 {
+    font-family: 'DM-Sans';
+    font-weight: 900;
+    font-variation-settings: 'opsz' 72;
+}
+
+p, a {
+    font-family: 'DM-Sans';
+    font-weight: 400;
+    font-variation-settings: 'opsz' 18;
+}
+
+h1 { font-size: 60px; }
+h2 { font-size: 36px; }
+h3 { font-size: 20px; }
+p, a { font-size: 18px; }
+
+body { background-color: whitesmoke; }

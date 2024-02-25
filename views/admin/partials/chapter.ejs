@@ -1,0 +1,17 @@
+<div class="chapter-wrapper">
+
+    <p><%= chapter.title %></p>
+
+    <div class="chapter-actions-wrapper">
+        <a class="action" href="/chapter/edit/<%= chapter._id %>">Edit</a>
+
+        <form action="/chapter/move-up/<%= unitId %>/<%= chapter._id %>?_method=PATCH" method="POST">
+            <input class="action" type="submit" value="Move Up">
+        </form>
+
+        <form action="/chapter/delete/<%= unitId %>/<%= chapter._id %>?_method=DELETE" method="POST">
+            <input class="action" type="submit" value="Delete">
+        </form>
+    </div>
+
+</div>

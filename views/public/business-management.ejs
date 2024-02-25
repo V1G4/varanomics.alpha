@@ -1,7 +1,87 @@
-<main>
+<div class="subject-container"><main>
+    <a href="/">&larr; Back</a>
+
     <h1>Business Management</h1>
 
-    <div class="chapter-list-container">
+    <% if (units && units.length > 0) { %>
+        <ol class="units">
+            <% units.forEach(unit => { %>
+                <li><div class="unit-wrapper">
+                    <h2><%= unit.title %></h2>
+
+                    <% if(unit.chapters && unit.chapters.length > 0) { %>
+
+                        <ol class="chapters">
+                            <% unit.chapters.forEach(chapter => { %>
+                                <li><a href="/business-management/<%= chapter._id %>">
+                                    <%= chapter.title %>
+                                </a></li>
+                            <% }) %>
+                        </ol>
+
+                    <% } %>
+                </div></li>
+            <% }) %>
+        </ol>
+    <% } %>
+</main></div>
+
+<style>
+
+    .subject-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    main {
+        width: 720px;
+        padding: 80px;
+        margin: 0 auto;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 { margin-bottom: 24px; }
+    h2 { margin-bottom: 8px; }
+
+    .unit-wrapper {
+        background-color: #c0cad6;
         
-    </div>
-</main>
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: 100%;
+
+        margin-top: 20px;
+        padding: 10px 18px 10px 18px;
+    }
+
+    .units {
+        list-style-type: none;
+        counter-reset: unit;
+    }
+
+    .chapters {
+        list-style-type: none;
+        counter-reset: chapter;
+
+        margin-bottom: 9px;
+    }
+
+    .unit-wrapper h2::before {
+        counter-increment: unit;
+        content: "Unit " counter(unit) ": ";
+    }
+
+    li a::before {
+        counter-increment: chapter;
+        content: counter(unit) "." counter(chapter) " - ";
+    }
+
+    a { color: black; }
+    a:hover { text-decoration: underline; }
+
+</style>

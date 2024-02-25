@@ -9,12 +9,8 @@ const ChapterSchema = new Schema({
     },
     body: {
         type: String,
+        default: "",
         required: false
-    },
-    isDraft: {
-        type: Boolean,
-        default: true,
-        required: true
     },
     createdAt: {
         type: Date,
