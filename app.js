@@ -9,7 +9,7 @@ const connectDB = require('./server/config/db');
 const MongoStore = require('connect-mongo');
 
 const app = express();
-const PORT = 5000 || process_params.ev.PORT;
+// const PORT = 5000 || process_params.ev.PORT;
 
 connectDB();
 
@@ -39,6 +39,6 @@ app.set('view engine', 'ejs');
 app.use('/', require('./server/routes/public'));
 app.use('/', require('./server/routes/admin'));
 
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`App listening on port ${PORT}`);
+// });
